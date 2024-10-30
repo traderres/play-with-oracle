@@ -1,6 +1,6 @@
 # play-with-oracle
 
-<pre>
+```
 Assumptions
  A) You have Maven 3.6.3 or later installed      
  B) You have Java 17 JDK installed
@@ -78,5 +78,4 @@ Follow these steps to use IntelliJ to erase and rebuild your Oracle database
  7. Select Nuke Database and press Play or Debug
     -- It should erase and rebuild your oracle database
  
-
-</pre>
+```
