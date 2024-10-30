@@ -71,8 +71,10 @@ Follow these steps to use IntelliJ to erase and rebuild your Oracle database
   
     b. Rename the duplicate entry to "Nuke Database"
  
-    c. Press "Add VM Option" and add this entry
-        -Dapp.datasource.flyway-clean-on-startup=TRUE
+    c. Select Modify Option -> Add VM Option
+       In the VM Options textbox, insert this:
+          -Dapp.datasource.flyway-clean-on-startup=TRUE
+          
     d. Press "OK"
 
  7. Select Nuke Database and press Play or Debug
