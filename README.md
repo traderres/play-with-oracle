@@ -6,7 +6,11 @@ Assumptions
  B) You have Java 17 JDK installed
  C) You have an Oracle Database Installed
  D) You have a tnsnames.ora file that contains a SID called "ORCL"
-
+ E) You have set an environment variable:  TNS_ADMIN
+      TNS_ADMIN must point to the directory that contains your tnsnames.ora 
+    The Oracle driver needs TNS_ADMIN set if you use the SID to connect to your database
+     
+      
 
 Approach 1:  Nuke your oracle database  using the maven plugin (on command-line) 
 --------------------------------------------------------------------------------
