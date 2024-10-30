@@ -8,8 +8,8 @@ Assumptions
  D) You have a tnsnames.ora file that contains a SID called "ORCL"
 
 
-Nuke your database using the command-line
------------------------------------------
+Approach 1:  Nuke your oracle database  using the maven plugin (on command-line) 
+--------------------------------------------------------------------------------
 Follow these steps erase and rebuild your Oracle database from command-line
  1. Set your environment variable:
       TNS_ADMIN points to the directory that holds the tnsnames.ora -- e.g., c:\tools\oracle_home\network\admin
@@ -37,8 +37,22 @@ Follow these steps erase and rebuild your Oracle database from command-line
     terminal> mvn flyway:migrate
 
 
-Nuke your database from IntelliJ (with a one-click debug option)
-----------------------------------------------------------------
+
+Approach 2:  Nuke your oracle database by running the compiled Java JAR 
+-----------------------------------------------------------------------
+ 1. Edit the src/main/resources/application.yaml
+    -- Adjust the app.datasource section
+
+ 2. Compile the java JAR
+    terminal> mvn clean package
+
+ 3. Run the java JAR to tell flyway to run clean and migrate
+    terminal> java -Dflyway-clean-on-startup=TRUE -jar ./target/play-with-oracle-1.0-SNAPSHOT-exec.jar
+
+
+
+Approach 3:  Nuke your database from IntelliJ (with a one-click debug option)
+-----------------------------------------------------------------------------
 Follow these steps to use IntelliJ to erase and rebuild your Oracle database
  1. Clone this project
     terminal> git clone https://github.com/traderres/play-with-oracle.git

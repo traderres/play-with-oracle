@@ -13,6 +13,10 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+    <!-- Tell Maven to compile for Java 17 -->
+    <maven.compiler.release>17</maven.compiler.release>
+    <maven.compiler.verbose>false</maven.compiler.verbose>
+
     <!-- Allow flyway:clean to actually erase the database -->
     <flyway.cleanDisabled>false</flyway.cleanDisabled>
   </properties>
@@ -95,6 +99,43 @@
 
   <build>
     <plugins>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <!-- Tell the maven compiler to build with Java 17 -->
+          <source>17</source>
+          <target>17</target>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <!-- This plugin provides the tools needed to repackage the Spring Boot JAR into a runnable JAR
+             Run this command to generate the runnable Spring Boot Jar
+                mvn clean package  *or*
+                mvn clean package spring-boot:repackage
+         -->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <addResources>true</addResources>
+        </configuration>
+
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+            <configuration>
+              <classifier>exec</classifier>
+            </configuration>
+          </execution>
+        </executions>
+
+      </plugin>
+
       <plugin>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-maven-plugin</artifactId>
