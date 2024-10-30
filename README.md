@@ -47,7 +47,7 @@ Approach 2:  Nuke your oracle database by running the compiled Java JAR
     terminal> mvn clean package
 
  3. Run the java JAR to tell flyway to run clean and migrate
-    terminal> java -Dflyway-clean-on-startup=TRUE -jar ./target/play-with-oracle-1.0-SNAPSHOT-exec.jar
+    terminal> java -Dapp.datasource.flyway-clean-on-startup=TRUE -jar ./target/play-with-oracle-1.0-SNAPSHOT-exec.jar
 
 
 
@@ -72,7 +72,7 @@ Follow these steps to use IntelliJ to erase and rebuild your Oracle database
     b. Rename the duplicate entry to "Nuke Database"
  
     c. Press "Add VM Option" and add this entry
-        -Dflyway-clean-on-startup=TRUE
+        -Dapp.datasource.flyway-clean-on-startup=TRUE
     d. Press "OK"
 
  7. Select Nuke Database and press Play or Debug
