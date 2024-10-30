@@ -1,0 +1,28 @@
+##########################################################
+# application.yaml   (used for development purposes)
+##########################################################
+
+
+# Tell spring not to run flyway on start-up
+spring.flyway.enabled: false
+
+
+##########################################################
+# Run Settings
+#########################################################
+# If true,  then this runs as a service  (so it refreshes on startup and every night)
+# If false, then this runs once and then stops
+run.service_mode: false
+
+
+##########################################################
+# Database Settings
+##########################################################
+app.datasource:
+    enabled: true
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@ORCL
+    username: test_user
+    password: secret
+    maxPoolSize: 2
+    flyway-clean-on-startup: false          # Tell FLYWAY to NOT erase the database on startup

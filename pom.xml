@@ -1,0 +1,114 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.example</groupId>
+  <artifactId>play-with-oracle</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>play-with-oracle</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- Allow flyway:clean to actually erase the database -->
+    <flyway.cleanDisabled>false</flyway.cleanDisabled>
+  </properties>
+
+
+  <dependencyManagement>
+    <dependencies>
+
+      <dependency>
+        <!-- Tell Spring Boot to use this **OLDER** version of flyway that works with Postgres 9.6 -->
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-core</artifactId>
+        <version>6.5.7</version>
+      </dependency>
+
+      <dependency>
+        <!-- Set the Spring Boot Version -->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>3.2.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+
+  <dependencies>
+    <dependency>
+      <!-- Spring Boot Console Application -->
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+
+    <dependency>
+      <!-- Tell Spring Boot to use this **OLDER** version of flyway that works with Postgres 9.6 -->
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-core</artifactId>
+      <version>6.5.7</version>
+    </dependency>
+
+    <dependency>
+      <!-- Hikari Data Source / JDBC Connection Pool -->
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+      <version>5.0.1</version>
+    </dependency>
+
+    <dependency>
+      <!-- Oracle Driver -->
+      <groupId>com.oracle.database.jdbc</groupId>
+      <artifactId>ojdbc8</artifactId>
+      <version>23.5.0.24.07</version>
+    </dependency>
+
+    <dependency>
+      <!-- SLF4J will use Logback-classic as its logging implementation -->
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.4.11</version>
+    </dependency>
+
+    <dependency>
+      <!-- Send logging from Java Common Logging to SLF4J -->
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+      <version>2.0.5</version>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-maven-plugin</artifactId>
+        <version>6.5.7</version>
+
+        <configuration>
+          <!-- Set the Oracle credentials when running mvn flyway:migrate from command-line -->
+          <!-- NOTE:  The TNS_ADMIN environment variable must point to the directory where tnsnames.ora is to use the ORCL sid  -->
+          <user>test_user</user>
+          <password>secret</password>
+          <url>jdbc:oracle:thin:@ORCL</url>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
